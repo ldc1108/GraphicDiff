@@ -2,6 +2,7 @@ package graphicdiff;
 
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  * View knows only about Model
@@ -63,7 +64,7 @@ public class View extends JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+            .addGap(0, 47, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel3);
@@ -79,7 +80,7 @@ public class View extends JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+            .addGap(0, 47, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel4);
@@ -95,7 +96,7 @@ public class View extends JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+            .addGap(0, 47, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel5);
@@ -139,12 +140,8 @@ public class View extends JFrame {
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel(
+            UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -159,12 +156,8 @@ public class View extends JFrame {
         /*
          * Create and display the form
          */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new View().setVisible(true);
-            }
-        });
+       this.pack();
+       this.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browse;
@@ -192,19 +185,19 @@ public class View extends JFrame {
         pane2.setText(s);
     }
     
-    void addBrowseListener(ActionListener l) {
-        browse.addActionListener(l);
+    void addBrowseListener(ActionListener list) {
+        browse.addActionListener(list);
     }
     
-    void addRightListener(ActionListener l) {
-        right.addActionListener(l);
+    void addRightListener(ActionListener list) {
+        right.addActionListener(list);
     }
     
-    void addLeftListener(ActionListener l) {
-        left.addActionListener(l);
+    void addLeftListener(ActionListener list) {
+        left.addActionListener(list);
     }
     
-    void addSkipListener(ActionListener l) {
-        skip.addActionListener(l);
+    void addSkipListener(ActionListener list) {
+        skip.addActionListener(list);
     }
 }

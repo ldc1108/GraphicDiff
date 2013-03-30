@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package graphicdiff;
 
 /**
@@ -18,7 +14,7 @@ public class GraphicDiff {
         Model model = new Model();
         View view = new View(model);
         Controller controller = new Controller(model, view);
-        
+        System.out.println("Hello");
         view.appear();
     }
 }
