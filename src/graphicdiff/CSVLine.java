@@ -33,20 +33,20 @@ public class CSVLine {
     public CSVLine(String fullLine, int lineNumber) {
         this.fullLine = fullLine;
         this.lineNumber = lineNumber;
-        fullLine = fullLine.replace("httpd-2.2.14_copy.", "");
         for (int i=0; i<2; i++) {
             // Get the 1st or 2nd "clone" in code clone
-            String half = fullLine.split(",")[0].split("-")[i];
-            String method = half.substring(half.indexOf("..")).replace("..", "").replace(".txt", "");
+            String half = fullLine.split(",")[0].split("httpd-2.2.14_copy")[i+1];
+            //System.out.println("Half"+i+":"+half);
+            String method = half.substring(half.indexOf("..")).replace("..", "").replace(".txt-", "");
             
             String directoryFileName = half.substring(0, half.indexOf(".."));
             directoryFileName = directoryFileName.replace(".", "/");
             directoryFileName += ".C";
             
             directoryFileNames[i] = directoryFileName;
-            methods[i] = method;
-            System.out.println(directoryFileName);
-            System.out.println(method);
+            methods[i] = method.replace("-","").replace(".txt", "");
+            System.out.println(directoryFileNames[i]);
+            System.out.println(methods[i]);
         }
     }
     

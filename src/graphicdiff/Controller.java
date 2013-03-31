@@ -2,6 +2,8 @@ package graphicdiff;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 /**
  * Controller processes user requests - Inner classes are observer patterns
@@ -27,6 +29,14 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Browse");
+            JFileChooser chooser = new JFileChooser();
+            int returnVal = chooser.showOpenDialog(new JFrame());
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                System.out.println("You chose to open this file: " +
+                chooser.getSelectedFile().getName());
+            }
+            model.processFile(chooser.getSelectedFile());
+            
         }
     }
     
