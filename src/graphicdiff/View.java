@@ -33,96 +33,57 @@ public class View extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        leftPanel = new javax.swing.JPanel();
         browse = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        seperator1 = new javax.swing.JPanel();
         right = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        seperator2 = new javax.swing.JPanel();
         left = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        seperator3 = new javax.swing.JPanel();
+        jumpFormPanel = new javax.swing.JPanel();
         jumpField = new javax.swing.JTextField();
         skip = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        pane1 = new javax.swing.JEditorPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        pane2 = new javax.swing.JEditorPane();
+        editorPanePanels = new javax.swing.JPanel();
+        scrollPane1 = new javax.swing.JScrollPane();
+        clonePane1 = new javax.swing.JEditorPane();
+        scrollPane2 = new javax.swing.JScrollPane();
+        clonePane2 = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("CloneDiff - Luke Coy"));
-        jPanel1.setLayout(new java.awt.GridLayout(10, 1));
+        
+        // Set layout for west pane (Buttons and stuff)
+        leftPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("CloneDiff - Luke Coy"));
+        leftPanel.setLayout(new java.awt.GridLayout(10, 1));
 
         browse.setText("Browse (CSV)");
-        jPanel1.add(browse);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 47, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel3);
-
+        
+        leftPanel.add(browse);
+        
+        leftPanel.add(seperator1);
+        
         right.setText("->");
-        jPanel1.add(right);
+        leftPanel.add(right);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 47, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel4);
-
+        leftPanel.add(seperator2);
+        
         left.setText("<-");
-        jPanel1.add(left);
+        leftPanel.add(left);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 47, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel5);
-
-        jPanel6.setLayout(new java.awt.GridLayout(1, 2));
-        jPanel6.add(jumpField);
-
+        leftPanel.add(seperator3);
+        
+        jumpFormPanel.setLayout(new java.awt.GridLayout(1, 2));
+        jumpFormPanel.add(jumpField);
         skip.setText("Jump to it!");
-        jPanel6.add(skip);
-
-        jPanel1.add(jPanel6);
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
-
-        jPanel2.setLayout(new java.awt.GridLayout(1, 2));
-
-        jScrollPane1.setViewportView(pane1);
-
-        jPanel2.add(jScrollPane1);
-
-        jScrollPane2.setViewportView(pane2);
-
-        jPanel2.add(jScrollPane2);
-
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        jumpFormPanel.add(skip);
+        leftPanel.add(jumpFormPanel);
+        
+        getContentPane().add(leftPanel, java.awt.BorderLayout.LINE_START);
+        editorPanePanels.setLayout(new java.awt.GridLayout(1, 2));
+        scrollPane1.setViewportView(clonePane1);
+        editorPanePanels.add(scrollPane1);
+        scrollPane2.setViewportView(clonePane2);
+        editorPanePanels.add(scrollPane2);
+        getContentPane().add(editorPanePanels, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,28 +123,28 @@ public class View extends JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browse;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel leftPanel;
+    private javax.swing.JPanel editorPanePanels;
+    private javax.swing.JPanel seperator1;
+    private javax.swing.JPanel seperator2;
+    private javax.swing.JPanel seperator3;
+    private javax.swing.JPanel jumpFormPanel;
+    private javax.swing.JScrollPane scrollPane1;
+    private javax.swing.JScrollPane scrollPane2;
     private javax.swing.JTextField jumpField;
     private javax.swing.JButton left;
-    private javax.swing.JEditorPane pane1;
-    private javax.swing.JEditorPane pane2;
+    private javax.swing.JEditorPane clonePane1;
+    private javax.swing.JEditorPane clonePane2;
     private javax.swing.JButton right;
     private javax.swing.JButton skip;
     // End of variables declaration//GEN-END:variables
 
     public void setPanel1(String s) {
-        pane1.setText(s);
+        clonePane1.setText(s);
     }
     
     public void setPanel2(String s) {
-        pane2.setText(s);
+        clonePane2.setText(s);
     }
     
     public String getSkipField() {
