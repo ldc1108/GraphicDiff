@@ -49,6 +49,8 @@ public class Controller {
             if (clones!=null) {
                 view.setPanel1(clones[0]);
                 view.setPanel2(clones[1]);
+                view.setLevenDistance(model.getCurrlevenDistance());
+                view.setFileInfo(model.getCurrFileInfo());
             }
         }
     }
@@ -61,6 +63,8 @@ public class Controller {
             if (clones!=null) {
                 view.setPanel1(clones[0]);
                 view.setPanel2(clones[1]);
+                view.setLevenDistance(model.getCurrlevenDistance());
+                view.setFileInfo(model.getCurrFileInfo());
             }
         }
     }
@@ -76,6 +80,8 @@ public class Controller {
                 if (clones!=null) {
                     view.setPanel1(clones[0]);
                     view.setPanel2(clones[1]);
+                    view.setLevenDistance(model.getCurrlevenDistance());
+                    view.setFileInfo(model.getCurrFileInfo());
                 }
             } catch (NumberFormatException numForEx) {
              

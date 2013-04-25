@@ -4,6 +4,7 @@ import jsyntaxpane.DefaultSyntaxKit;
 import model.Model;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 /**
@@ -19,6 +20,8 @@ public class View extends JFrame {
     private javax.swing.JPanel seperator2;
     private javax.swing.JPanel seperator3;
     private javax.swing.JPanel jumpFormPanel;
+    private javax.swing.JPanel seperator4;
+    private javax.swing.JTextField levenDistance;
     
     private javax.swing.JScrollPane scrollPane1;
     //private RTextScrollPane sp1;
@@ -28,6 +31,7 @@ public class View extends JFrame {
     private javax.swing.JTextField jumpField;
     private javax.swing.JButton left;
     
+    private javax.swing.JTextArea fileInfo;
     private javax.swing.JEditorPane clonePane1;
     //private RSyntaxTextArea rsta1;
     private javax.swing.JEditorPane clonePane2;
@@ -77,10 +81,15 @@ public class View extends JFrame {
         jumpFormPanel = new javax.swing.JPanel();
         jumpField = new javax.swing.JTextField();
         skip = new javax.swing.JButton();
+        seperator4 = new javax.swing.JPanel();
+        levenDistance = new javax.swing.JTextField();
+        levenDistance.setEditable(false);
+        levenDistance.setText("Levenshtein Distance: ");
+        
         editorPanePanels = new javax.swing.JPanel();
         
         jsyntaxpane.DefaultSyntaxKit.initKit();
-     
+        fileInfo = new JTextArea();
         clonePane1 = new javax.swing.JEditorPane();   
         scrollPane1 = new javax.swing.JScrollPane(clonePane1);
         clonePane1.setContentType("text/c");
@@ -117,6 +126,9 @@ public class View extends JFrame {
         jumpFormPanel.add(skip);
         leftPanel.add(jumpFormPanel);
         
+        leftPanel.add(seperator4);
+        leftPanel.add(levenDistance);
+        
         getContentPane().add(leftPanel, java.awt.BorderLayout.LINE_START);
         editorPanePanels.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -125,6 +137,7 @@ public class View extends JFrame {
         editorPanePanels.add(scrollPane2);
         
         getContentPane().add(editorPanePanels, java.awt.BorderLayout.CENTER);
+        getContentPane().add(fileInfo, java.awt.BorderLayout.SOUTH);
 
         pack();
     }
@@ -162,5 +175,13 @@ public class View extends JFrame {
     
     void addSkipListener(ActionListener list) {
         skip.addActionListener(list);
+    }
+    
+    void setLevenDistance(int l) {
+        levenDistance.setText("Levenshtein Distance: "+l);
+    }
+    
+    void setFileInfo(String s) {
+        fileInfo.setText(s);
     }
 }

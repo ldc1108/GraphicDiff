@@ -77,12 +77,15 @@ public class Model {
                 
                 // Find the method in the ctag file
                 while (line != null) {
-                    if (line.toLowerCase().startsWith(csv.methods[i].toLowerCase()) && line.contains("/^") && line.contains("$/")) {
+                    
+                    if (line.split("\\s++")[0].toLowerCase().equals(csv.methods[i].toLowerCase()) && line.contains("/^") && line.contains("$/")) {
                         // Adjust index because it starts on the start of the pattern
+                        System.out.println("check");
                         int sub1 = line.indexOf("/^")+2;
                         int sub2 = line.indexOf("$/");
                         ctagFullMethodName[i] = line.substring(sub1, sub2);
                         System.out.println("Full Method Name: "+ctagFullMethodName[i]);
+                        break;
                     }
                     line = reader.readLine();
                 }
@@ -105,14 +108,20 @@ public class Model {
                             line = reader.readLine();
                         }
                         s.push("{");
+                        // In the rare case that there is a "}" on the same line
+                        if (line.contains("}")) {
+                            s.pop();
+                            methods[i] = line;
+                        }
                         System.out.println(s.size());
                         System.out.println("Current Method Line:"+line);
                         line = reader.readLine();
                         
                         // Keep going through the method content until stack empty
                         while (s.empty()==false) {
-                            if (line == null) {
+                            if (!reader.ready() && line == null) {
                                 System.err.println("EOF BUT STACK !EMPTY");
+                                methods[i] += "EOF?";
                                 break;
                             }
                             if (line.contains("{")) {
@@ -142,6 +151,15 @@ public class Model {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, e);
         }
         return methods;
+    }
+    
+    // Return current leven distance of 
+    public int getCurrlevenDistance() {
+         return clones.get(currentLine).getLevenDistance();
+    }
+    
+    public String getCurrFileInfo() {
+        return clones.get(currentLine).getFullLine();
     }
     
     // See how many of a given symbol are on a line
