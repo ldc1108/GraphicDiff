@@ -1,4 +1,4 @@
-package graphicdiff;
+package model;
 
 /**
  *
@@ -40,13 +40,13 @@ public class CSVLine {
             String method = half.substring(half.indexOf("..")).replace("..", "").replace(".txt-", "");
             
             String directoryFileName = half.substring(0, half.indexOf(".."));
-            directoryFileName = directoryFileName.replace(".", "/");
+            directoryFileName = directoryFileName.replace(".", "\\");
             directoryFileName += ".C";
             
-            directoryFileNames[i] = directoryFileName;
+            directoryFileNames[i] = ("httpd-2.2.14" + directoryFileName);
             methods[i] = method.replace("-","").replace(".txt", "");
-            System.out.println(directoryFileNames[i]);
-            System.out.println(methods[i]);
+            //System.out.println(directoryFileNames[i]);
+            System.out.println("CSV Methods:"+methods[i]);
         }
     }
     

@@ -1,5 +1,6 @@
 package graphicdiff;
 
+import model.Model;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -183,6 +184,10 @@ public class View extends JFrame {
     
     public void setPanel2(String s) {
         pane2.setText(s);
+    }
+    
+    public String getSkipField() {
+        return jumpField.getText();
     }
     
     void addBrowseListener(ActionListener list) {

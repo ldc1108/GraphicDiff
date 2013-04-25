@@ -1,5 +1,6 @@
 package graphicdiff;
 
+import model.Model;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
@@ -33,7 +34,7 @@ public class Controller {
             int returnVal = chooser.showOpenDialog(new JFrame());
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 System.out.println("You chose to open this file: " +
-                chooser.getSelectedFile().getName());
+                chooser.getSelectedFile());
             }
             model.processFile(chooser.getSelectedFile());
             
@@ -44,6 +45,11 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) { 
             System.out.println("Right");
+            String[] clones = model.next();
+            if (clones!=null) {
+                view.setPanel1(clones[0]);
+                view.setPanel2(clones[1]);
+            }
         }
     }
     
@@ -51,6 +57,11 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) { 
             System.out.println("Left");
+            String[] clones = model.prev();
+            if (clones!=null) {
+                view.setPanel1(clones[0]);
+                view.setPanel2(clones[1]);
+            }
         }
     }
     
@@ -58,6 +69,17 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Skip");
+            String skipNumber = view.getSkipField();
+            try {
+                int skipInt = Integer.parseInt(skipNumber);
+                String[] clones = model.skip(skipInt);
+                if (clones!=null) {
+                    view.setPanel1(clones[0]);
+                    view.setPanel2(clones[1]);
+                }
+            } catch (NumberFormatException numForEx) {
+             
+            } 
         }
     }
     
