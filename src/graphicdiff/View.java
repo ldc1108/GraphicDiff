@@ -1,5 +1,6 @@
 package graphicdiff;
 
+import java.awt.BorderLayout;
 import jsyntaxpane.DefaultSyntaxKit;
 import model.Model;
 import java.awt.event.ActionListener;
@@ -15,6 +16,9 @@ public class View extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browse;
     private javax.swing.JPanel leftPanel;
+    private javax.swing.JPanel rightPanel;
+    private javax.swing.JTextArea notes;
+    private javax.swing.JButton exportNotes;
     private javax.swing.JPanel editorPanePanels;
     private javax.swing.JPanel seperator1;
     private javax.swing.JPanel seperator2;
@@ -32,6 +36,7 @@ public class View extends JFrame {
     private javax.swing.JButton left;
     
     private javax.swing.JTextArea fileInfo;
+    private javax.swing.JButton saveNotes;
     private javax.swing.JEditorPane clonePane1;
     //private RSyntaxTextArea rsta1;
     private javax.swing.JEditorPane clonePane2;
@@ -72,6 +77,12 @@ public class View extends JFrame {
         }
 
         leftPanel = new javax.swing.JPanel();
+        rightPanel = new javax.swing.JPanel();
+        notes = new javax.swing.JTextArea();
+        exportNotes = new javax.swing.JButton();
+        exportNotes.setText("Export notes");
+        notes.setText("Put your notes here.");
+        saveNotes = new javax.swing.JButton("Save note");
         browse = new javax.swing.JButton();
         seperator1 = new javax.swing.JPanel();
         right = new javax.swing.JButton();
@@ -138,6 +149,13 @@ public class View extends JFrame {
         
         getContentPane().add(editorPanePanels, java.awt.BorderLayout.CENTER);
         getContentPane().add(fileInfo, java.awt.BorderLayout.SOUTH);
+        
+        rightPanel.setLayout(new BorderLayout());
+        rightPanel.add(notes, BorderLayout.CENTER);
+        rightPanel.add(saveNotes, BorderLayout.SOUTH);
+        rightPanel.add(exportNotes, BorderLayout.NORTH);
+        
+        getContentPane().add(rightPanel, java.awt.BorderLayout.EAST);
 
         pack();
     }
@@ -147,6 +165,10 @@ public class View extends JFrame {
      */
     public void appear() {
        this.setVisible(true);
+    }
+    
+    public String getNoteText() {
+        return notes.getText();
     }
 
     public void setPanel1(String s) {
@@ -177,11 +199,19 @@ public class View extends JFrame {
         skip.addActionListener(list);
     }
     
+    void addSaveNoteListner(ActionListener list) {
+        saveNotes.addActionListener(list);
+    }
+    
+    void addExportNotesListener(ActionListener list) {
+        exportNotes.addActionListener(list);
+    }
+    
     void setLevenDistance(int l) {
         levenDistance.setText("Levenshtein Distance: "+l);
     }
     
-    void setFileInfo(String s) {
-        fileInfo.setText(s);
+    void setFileInfo(String s, int currentLine) {
+        fileInfo.setText("#"+currentLine+" "+s);
     }
 }

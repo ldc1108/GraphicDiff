@@ -1,11 +1,14 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +22,8 @@ public class Model {
     
     private ArrayList<CSVLine> clones = new ArrayList();
     private ArrayList<String[]> cloneMethods = new ArrayList();
+    private HashMap<String, String> notesMap = new HashMap();
+    
     int currentLine = 0;
     
     // Takes in the directory of the CSV file
@@ -43,6 +48,25 @@ public class Model {
         // The debugger
         //retreiveMethod(clones.get(194));
         
+    }
+    
+    // Save all the notes the user wrote
+    public void saveNotes() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("notes.txt"));
+            for (String key : notesMap.keySet()) {
+                String value = notesMap.get(key);
+                writer.write(String.valueOf(key)+"\n"+value+"\n");
+            }
+            writer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    // Add a note to the map
+    public void addNotes(String s) {
+        notesMap.put(clones.get(currentLine).getFullLine(), s);
     }
     
     // Given a CSVline, returns method content
@@ -156,6 +180,10 @@ public class Model {
     // Return current leven distance of 
     public int getCurrlevenDistance() {
          return clones.get(currentLine).getLevenDistance();
+    }
+    
+    public int getCurentLine() {
+        return currentLine;
     }
     
     public String getCurrFileInfo() {

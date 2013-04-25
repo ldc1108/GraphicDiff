@@ -22,6 +22,8 @@ public class Controller {
         view.addLeftListener(new leftListener());
         view.addRightListener(new rightListener());
         view.addSkipListener(new skipListener());
+        view.addSaveNoteListner(new saveNoteListener());
+        view.addExportNotesListener(new exportNotesListener());
     }
     
     // Inner Classes
@@ -41,6 +43,20 @@ public class Controller {
         }
     }
     
+    class saveNoteListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            model.addNotes(view.getNoteText());
+        }
+    }
+    
+    class exportNotesListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            model.saveNotes();
+        }      
+    }
+    
     class rightListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) { 
@@ -50,7 +66,7 @@ public class Controller {
                 view.setPanel1(clones[0]);
                 view.setPanel2(clones[1]);
                 view.setLevenDistance(model.getCurrlevenDistance());
-                view.setFileInfo(model.getCurrFileInfo());
+                view.setFileInfo(model.getCurrFileInfo(), model.getCurentLine());
             }
         }
     }
@@ -64,7 +80,7 @@ public class Controller {
                 view.setPanel1(clones[0]);
                 view.setPanel2(clones[1]);
                 view.setLevenDistance(model.getCurrlevenDistance());
-                view.setFileInfo(model.getCurrFileInfo());
+                view.setFileInfo(model.getCurrFileInfo(), model.getCurentLine());
             }
         }
     }
@@ -81,7 +97,7 @@ public class Controller {
                     view.setPanel1(clones[0]);
                     view.setPanel2(clones[1]);
                     view.setLevenDistance(model.getCurrlevenDistance());
-                    view.setFileInfo(model.getCurrFileInfo());
+                    view.setFileInfo(model.getCurrFileInfo(), model.getCurentLine());
                 }
             } catch (NumberFormatException numForEx) {
              
