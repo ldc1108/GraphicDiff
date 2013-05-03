@@ -1,10 +1,15 @@
 package graphicdiff;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import jsyntaxpane.DefaultSyntaxKit;
 import model.Model;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
@@ -17,6 +22,7 @@ public class View extends JFrame {
     private javax.swing.JButton browse;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
+    private javax.swing.JTextArea author;
     private javax.swing.JTextArea notes;
     private javax.swing.JButton exportNotes;
     private javax.swing.JPanel editorPanePanels;
@@ -36,6 +42,16 @@ public class View extends JFrame {
     private javax.swing.JButton left;
     
     private javax.swing.JTextArea fileInfo;
+    
+    private javax.swing.JPanel cloneTypePanel;
+    private javax.swing.JRadioButton noClone;
+    private javax.swing.JRadioButton notSure;
+    private javax.swing.JRadioButton type1Choice;
+    private javax.swing.JRadioButton type2Choice;
+    private javax.swing.JRadioButton type3Choice;
+    private javax.swing.JRadioButton type4Choice;
+    private ButtonGroup group;
+    
     private javax.swing.JButton saveNotes;
     private javax.swing.JEditorPane clonePane1;
     //private RSyntaxTextArea rsta1;
@@ -78,11 +94,38 @@ public class View extends JFrame {
 
         leftPanel = new javax.swing.JPanel();
         rightPanel = new javax.swing.JPanel();
+        author = new javax.swing.JTextArea();
+        author.setText("(Author Name Here)");
         notes = new javax.swing.JTextArea();
+        
+        cloneTypePanel = new javax.swing.JPanel();
+        noClone = new javax.swing.JRadioButton();
+        notSure = new javax.swing.JRadioButton();
+        type1Choice = new javax.swing.JRadioButton();
+        type2Choice = new javax.swing.JRadioButton();
+        type3Choice = new javax.swing.JRadioButton();
+        type4Choice = new javax.swing.JRadioButton();
+        group = new ButtonGroup();
+        
+        group.add(noClone);
+        group.add(notSure);
+        group.add(type1Choice);
+        group.add(type2Choice);
+        group.add(type3Choice);
+        group.add(type4Choice);
+        noClone.setText("No Clone");
+        noClone.setSelected(true);
+        notSure.setText("Unsure");
+        type1Choice.setText("Type 1");
+        type2Choice.setText("Type 2");
+        type3Choice.setText("Type 3");
+        type4Choice.setText("Type 4");
+        
         exportNotes = new javax.swing.JButton();
         exportNotes.setText("Export notes");
         notes.setText("Put your notes here.");
-        saveNotes = new javax.swing.JButton("Save note");
+        saveNotes = new javax.swing.JButton("Commit note");
+        
         browse = new javax.swing.JButton();
         seperator1 = new javax.swing.JPanel();
         right = new javax.swing.JButton();
@@ -98,13 +141,11 @@ public class View extends JFrame {
         levenDistance.setText("Levenshtein Distance: ");
         
         editorPanePanels = new javax.swing.JPanel();
-        
         jsyntaxpane.DefaultSyntaxKit.initKit();
         fileInfo = new JTextArea();
         clonePane1 = new javax.swing.JEditorPane();   
         scrollPane1 = new javax.swing.JScrollPane(clonePane1);
         clonePane1.setContentType("text/c");
-        
         clonePane2 = new javax.swing.JEditorPane();
         scrollPane2 = new javax.swing.JScrollPane(clonePane2);
         clonePane2.setContentType("text/c");
@@ -152,8 +193,20 @@ public class View extends JFrame {
         
         rightPanel.setLayout(new BorderLayout());
         rightPanel.add(notes, BorderLayout.CENTER);
-        rightPanel.add(saveNotes, BorderLayout.SOUTH);
-        rightPanel.add(exportNotes, BorderLayout.NORTH);
+        
+        cloneTypePanel.setLayout(new GridLayout(3,2));
+        cloneTypePanel.add(saveNotes);
+        cloneTypePanel.add(exportNotes);
+        cloneTypePanel.add(new javax.swing.JLabel());
+        cloneTypePanel.add(noClone);
+        cloneTypePanel.add(notSure);
+        cloneTypePanel.add(type1Choice);
+        cloneTypePanel.add(type2Choice);
+        cloneTypePanel.add(type3Choice);
+        cloneTypePanel.add(type4Choice);
+        rightPanel.add(cloneTypePanel, BorderLayout.SOUTH);
+        //rightPanel.add(saveNotes, BorderLayout.SOUTH);
+        rightPanel.add(author, BorderLayout.NORTH);
         
         getContentPane().add(rightPanel, java.awt.BorderLayout.EAST);
 
@@ -213,5 +266,28 @@ public class View extends JFrame {
     
     void setFileInfo(String s, int currentLine) {
         fileInfo.setText("#"+currentLine+" "+s);
+    }
+    
+    void clearNotes() {
+        notes.setText("");
+    }
+    
+    void setNotes(String s) {
+        notes.setText(s);
+    }
+    
+    String getAuthor() {
+        return author.getText();
+    }
+    
+    String getSelectedType() {
+        for (Enumeration<AbstractButton> buttons = group.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
     }
 }

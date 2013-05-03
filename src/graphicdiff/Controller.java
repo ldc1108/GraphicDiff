@@ -43,10 +43,11 @@ public class Controller {
         }
     }
     
+    //type text author
     class saveNoteListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            model.addNotes(view.getNoteText());
+            model.addNotes(view.getSelectedType()+","+view.getNoteText().replaceAll(",", ";") +","+view.getAuthor().replaceAll(",", ";"));
         }
     }
     
@@ -67,6 +68,8 @@ public class Controller {
                 view.setPanel2(clones[1]);
                 view.setLevenDistance(model.getCurrlevenDistance());
                 view.setFileInfo(model.getCurrFileInfo(), model.getCurentLine());
+                view.clearNotes();
+                view.setNotes(model.getNotes());
             }
         }
     }
@@ -81,6 +84,8 @@ public class Controller {
                 view.setPanel2(clones[1]);
                 view.setLevenDistance(model.getCurrlevenDistance());
                 view.setFileInfo(model.getCurrFileInfo(), model.getCurentLine());
+                view.clearNotes();
+                view.setNotes(model.getNotes());
             }
         }
     }
@@ -98,6 +103,8 @@ public class Controller {
                     view.setPanel2(clones[1]);
                     view.setLevenDistance(model.getCurrlevenDistance());
                     view.setFileInfo(model.getCurrFileInfo(), model.getCurentLine());
+                    view.clearNotes();
+                    view.setNotes(model.getNotes());
                 }
             } catch (NumberFormatException numForEx) {
              

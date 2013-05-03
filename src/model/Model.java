@@ -36,7 +36,8 @@ public class Model {
             int lineNumber = 2;
             while (line != null) {
                 System.out.println(line + "| Line Number:"+lineNumber);
-                this.addLine(line, lineNumber);
+                this.addLine((line.split(",")[0]+","+line.split(",")[1]), lineNumber);
+                addLegacy(line);
                 line = reader.readLine();
                 lineNumber++;
             }
@@ -50,13 +51,28 @@ public class Model {
         
     }
     
+    // adds to the notesMap if already a analyzed clone
+    public void addLegacy(String line) {
+        if (line.split(",").length > 2) {
+            String numberClone = line.split(",")[2];
+            notesMap.put(numberClone, line.substring(line.indexOf(line.split(",")[3])));
+        }
+    }
+    
     // Save all the notes the user wrote
+    // Format: #x, notes go here
     public void saveNotes() {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("notes.txt"));
-            for (String key : notesMap.keySet()) {
-                String value = notesMap.get(key);
-                writer.write(String.valueOf(key)+"\n"+value+"\n");
+            BufferedWriter writer = new BufferedWriter(new FileWriter("Sheet2.csv", true));
+            writer.write("\n");
+            for (int i=0; i<clones.size(); i++) {
+                if (notesMap.containsKey(String.valueOf(i))) {
+                    String key = String.valueOf(i);
+                    String value = notesMap.get(key);
+                    writer.write(clones.get(i).getFullLine()+","+String.valueOf(key)+","+value.replaceAll("\n", " ")+"\n");
+                } else {
+                    writer.write(clones.get(i).getFullLine()+"\n");
+                }
             }
             writer.close();
         } catch (IOException ex) {
@@ -66,7 +82,7 @@ public class Model {
     
     // Add a note to the map
     public void addNotes(String s) {
-        notesMap.put(clones.get(currentLine).getFullLine(), s);
+        notesMap.put(String.valueOf(currentLine), s);
     }
     
     // Given a CSVline, returns method content
@@ -236,6 +252,14 @@ public class Model {
             return cloneMethods.get(SkipNumber);
         } else {
             return null;
+        }
+    }
+    
+    public String getNotes() {
+        if (notesMap.containsKey(String.valueOf(currentLine))) {
+            return notesMap.get(String.valueOf(currentLine));
+        } else {
+            return "";
         }
     }
 }
